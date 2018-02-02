@@ -1,0 +1,49 @@
+1. RDDs
+	- La he thong tinh toan song song
+	- rdd = sc.parallelize(data, n) 
+		-> chia thanh n luong, kq se hien khi goi rdd.glom().collect()
+
+2. Transformation:
+	- map(func): tra ve 1 rdd moi qua song anh
+	VD: rdd2 = rdd1.map(lambda x: 2*x)
+	- filter(func): tra ve 1 rdd moi neu gia tri trong rdd co gia tri true qua ham func
+	VD: rdd2 = rdd1.filter(lambda x: x % 2 == 0)
+	- distinct(): tra ve 1 rdd moi gom cac phan tu cua rdd cu nhung moi phan tu chi xuat hien 1 lan
+	VD: rdd2 = rdd1.distinct()
+	- flatMap(func): nhu ham map() nhung khac la khi map() tra ve mang gia tri thi rdd se gom mang cac mang. con flatMap(func) thi rdd se gom 1 mang don
+	VD: +map()
+		>>> data = [1, 2, 3, 4]
+		>>> rdd = sc.parallelize(data)
+		>>> map = rdd.map(lambda x: [x, x**2])
+		>>> map.collect()
+		[[1, 1], [2, 4], [3, 9], [4, 16]]
+	    +flatMap()
+		>>> data = [1, 2, 3, 4]
+		>>> rdd = sc.parallelize(data)
+		>>> flatMap = rdd.flatMap(lambda x: [x, x**2])
+		>>> flatMap.collect()
+		[1, 1, 2, 4, 3, 9, 4, 16]
+
+3. Actions:
+	- reduce(): co 2 tham so va tra ve 1 gia tri, dung ket qua tu qua trinh Transformation
+	VD: 	>>> data = [1, 2, 3, 4]
+		>>> rdd = sc.parallelize(data)
+		>>> map = rdd.map(lambda x: [x, x**2])
+		>>> res = map.reduce(lambda x,y: x+y)
+		10
+	- take(n): tra ve mang n gia tri dau trong mang du lieu cua he thong rdd
+	VD: 	>>> data = [1, 2, 3, 4]
+		>>> rdd = sc.parallelize(data)
+		>>> rdd.take(2)
+		[1,2]
+	- collect(): tra ve mang gom tat ca gia tri trong he trong rdd
+	VD: 	>>> data = [1, 2, 3, 4]
+		>>> rdd = sc.parallelize(data)
+		>>> rdd.collect()
+		[1,2,3,4,5]
+	- takeOrdered(n, func): sap xep theo ham func roi tra ve n gia tri dau
+	VD:	>>> data = [1, 2, 3, 4]
+		>>> rdd = sc.parallelize(data)
+		>>> rdd.takeOrdered(3, lambda x: -x)
+		[4, 3, 2]
+	Sau nay nho sua text_search.py trong thu muc python
