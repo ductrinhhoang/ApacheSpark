@@ -7,7 +7,7 @@
 		- map(): chuyen RDDs thanh pairRDDs
 		VD:	>>>RDDs = sc.parallelize([1,2,3,4])
 			>>>pairRDDs
-		- mapValues(): tu 1 basic RDDs thi thay doi values la cac phan tu cua list ma	pairRDDs giu.
+		- mapValues(): tu 1 basic RDDs thi thay doi values la cac phan tu cua list ma pairRDDs giu.
 		VD: 	>>>RDDs = sc.parallelize([(1, 2), (2, 2), (3, 2), (4, 2)])
 			>>>def f(a):
 			...	return a**2
@@ -15,12 +15,15 @@
 			>>>pairRDDs = RDDs.mapValues(f)
 			>>>pairRDDs.collect()
 			>>>[(1, 4), (2, 4), (3, 4), (4, 4)]
-	2.2. Action:
 		- reduceByKey(): tac dong len cac dai luong cung key trong list ma pair
-	RDDs giu.
+		RDDs giu.
 		VD:	>>>pairRDDs = sc.parallelize([("a",1),("b",2),("a",4)])
 			>>>newPairRDDs = pairRDDs.reduceByKey(lambda x, y: x+y)
 			#tra ve 1 pair RDDs khac
 			>>>newPairRDDs.collect()
 			[('a', 5), ('b', 2)]
-		- foldByKey(): tg tu fold() nhung chi thao tac cho cac dai luong cung 		key ma pair RDDs giu.
+		- groupByKey(): dung tao rdd dc nhom theo chi dan
+			syntax: rdd.groupByKeu().mapValues(func)
+	2.2. Action:
+		
+		- foldByKey(): tg tu fold() nhung chi thao tac cho cac dai luong cung key ma pair RDDs giu.
