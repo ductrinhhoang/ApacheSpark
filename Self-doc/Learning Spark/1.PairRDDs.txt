@@ -1,0 +1,77 @@
+PairRdd: 
+	-Co di kem values/key de dung nhu hashfunction.
+
+	2.1. Transformation:
+		- map(): chuyen RDDs thanh pairRDDs
+		VD:	>>>RDDs = sc.parallelize([1,2,3,4])
+			>>>pairRDDs
+		- mapValues(): tu 1 basic RDDs thi thay doi values la cac phan tu cua list ma pairRDDs giu.
+		VD: 	>>>RDDs = sc.parallelize([(1, 2), (2, 2), (3, 2), (4, 2)])
+			>>>def f(a):
+			...	return a**2
+			...
+			>>>pairRDDs = RDDs.mapValues(f)
+			>>>pairRDDs.collect()
+			>>>[(1, 4), (2, 4), (3, 4), (4, 4)]
+		- reduceByKey(): tac dong len cac dai luong cung key trong list ma pair
+		RDDs giu.
+		VD:	>>>pairRDDs = sc.parallelize([("a",1),("b",2),("a",4)])
+			>>>newPairRDDs = pairRDDs.reduceByKey(lambda x, y: x+y)
+			#tra ve 1 pair RDDs khac
+			>>>newPairRDDs.collect()
+			[('a', 5), ('b', 2)]
+		- groupBy(): dung de chuyen 1 RDDs thanh pairRDDs theo cach nhom cac phan tu co cung tinh chat nao do
+		VD: 
+			>>>data = ["python is a language for programing spark","so is scala"]
+			>>>rdd = sc.parallelize(data)
+			>>>pairRdd = rdd.groupBy(lambda x: "python" in x)
+			>>>pairRdd.collect()
+			[(False, <pyspark.resultiterable.ResultIterable object at 0x7fe53ded6490>), (True, <pyspark.resultiterable.ResultIterable object at 0x7fe53ded6a50>)]
+			
+		- groupByKey(): dung tao rdd dc nhom theo chi dan
+			syntax: rdd.groupByKey().mapValues(func)
+		- combineByKey(createCombiner, mergeValue, mergeCombiner): dung de tao 1 rdd moi ma chua nhieu hon 1 value hon rdd goc
+		VD: tra r 1 rdd chua cac phan tu giu nguyen key cu ma value ta (sum, count)
+			>>>data = [("a",1),("b",2),("b", 3),("a", 5)]
+			>>>rdd = sc.parallelize(data)
+			>>>sumCount = rdd.combineByKey(lambda value: (value, 1),#tao combine
+                            lambda x, value: (x[0] + value, x[1] + 1), #hop cac value cung key tiep theo
+                            lambda x, y: (x[0] + y[0], x[1] + y[1]) #hop cac combine cung key
+                           )
+		- flatMapValues(): giong flatMap() nhung chi tac dong len cac phan tu cung key
+		VD:
+			>>> data = [('a', 3), ('b', 2)]
+			>>> rdd = sc.parallelize(data)
+			>>> rdd.flatMapValues(lambda x: range(x,5)).collect()
+			[('a', 3), ('a', 4), ('b', 2), ('b', 3), ('b', 4)]
+		- keys(): tra ve rdd don gian chi gom keys
+		VD:
+			>>> data = [('a', 3), ('b', 2)]
+			>>> rdd = sc.parallelize(data)
+			>>> rdd.keys().collect()
+			['a','b']
+		- values(): tra ve rdd don gian chi gom values
+		VD:
+			>>> data = [('a', 3), ('b', 2)]
+			>>> rdd = sc.parallelize(data)
+			>>> rdd.values().collect()
+			[3, 2]
+		- sortByKey(func): tra ve rdd sap xep theo func
+		VD: 
+			>>> data = [('b', 3), ('a', 2)]
+			>>> rdd = sc.parallelize(data)
+			>>> rdd.sortByKey(true).collect()
+			[('a', 2), ('b', 3)]
+	2.2. Action:
+		- countByKey(): tra ve 1 obj chua cac gia tri co value la so lan xuat hien cua cac phan tu cung key trong rdd cu
+		VD:
+			>>> data = [("a",1),("b",2),("b", 3),("a", 5)]
+			>>> rdd = sc.parallelize(data)
+			>>> rdd.countByKey()
+			defaultdict(<type 'int'>, {'a': 2, 'b': 2})
+		-lookup(key): tra ve mang cac gia tri theo key
+			>>> data = [("a",1),("b",2),("b", 3),("a", 5)]
+			>>> rdd = sc.parallelize(data)
+			>>> rdd.lookup('a')
+			[1,5]
+		- foldByKey(): tg tu fold() nhung chi thao tac cho cac dai luong cung key ma pair RDDs giu.
