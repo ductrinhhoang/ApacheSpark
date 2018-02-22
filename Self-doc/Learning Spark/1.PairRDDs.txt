@@ -75,3 +75,8 @@ PairRdd:
 			>>> rdd.lookup('a')
 			[1,5]
 		- foldByKey(): tg tu fold() nhung chi thao tac cho cac dai luong cung key ma pair RDDs giu.
+
+	2.3. Data Partitioning
+		- Giai phap nay dat ra de giai quyet viec giam thieu giao tiep mang -> giam chi phi.
+		- Giai phap nay chi co ich khi tap giu lieu cua ta duoc su dung nhieu lan.
+		- Ta su dung viec phan v
