@@ -79,4 +79,9 @@ PairRdd:
 	2.3. Data Partitioning
 		- Giai phap nay dat ra de giai quyet viec giam thieu giao tiep mang -> giam chi phi.
 		- Giai phap nay chi co ich khi tap giu lieu cua ta duoc su dung nhieu lan.
-		- Ta su dung viec phan v
+		- partitionBy(num): chia pair-rdd thanh 1 pair-rdd moi, trong do, rdd moi nay se dc phan so luong la NUM sao cho cac phan tu co cung key se dc nhom chung vao 1 luong
+		VD:
+			>>> pairs = sc.parallelize([1, 2, 3, 4, 2, 4, 1]).map(lambda x: (x, x))
+			>>> pairs.partitionBy(5).glom().collect()
+			[[], [(1, 1), (1, 1)], [(2, 2), (2, 2)], [(3, 3)], [(4, 4), (4, 4)]]
+
