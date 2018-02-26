@@ -1,0 +1,17 @@
+1) Open:
+	- Mo bang textFile(): cho 1 rdd
+	vd:
+		>>> input = sc.textFile("/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning/InOut/TextFile/Data.txt")
+		>>> input.collect()
+		[u'abc xyz']
+	- Mo bang wholeTextFiles(path): tra ve 1 rdd ma key la duong dan cua file ma path la folder chua cac file du lieu
+	vd:
+		>>> input = sc.wholeTextFiles("/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning/InOut/TextFile")
+		>>> input.collect()
+		[(u'file:/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning/InOut/TextFile/Data.txt', u'abc xyz\n'), (u'file:/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning/InOut/TextFile/Data2.txt', u'')]
+
+2) Save:
+	- Luu rdd trong file .txt trong folder theo duong dan yeu cau
+	vd:
+		>>> rdd1 = sc.parallelize(['abc','xyz'])
+		>>> rdd1.saveAsTextFile('/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning/InOut/TextFile/Result')

@@ -26,5 +26,7 @@ rdd0 = rdd.mapValues(lambda x: change(x))\
             # combine result
             # change and format result
             # sort result
+print rdd1.collect()
+
 
 print rdd0.collect()

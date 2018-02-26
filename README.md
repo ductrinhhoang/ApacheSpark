@@ -7,3 +7,5 @@ Then, you need set path for spark. Turn on terminal -> vi ~/.bashrc
 In the bottom of file, write:
 	export SPARK_HOME="/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7"
 	export PATH=$PATH:$SPARK_HOME/bin
+
+All code i make myself are in /home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning
