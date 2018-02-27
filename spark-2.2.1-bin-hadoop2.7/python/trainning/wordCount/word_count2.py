@@ -1,18 +1,14 @@
-from pyspark import SparkContext 
-def show(x):
-    print "Show:", x, ", len:", len(x)
-    return len(x)
+from pyspark import SparkContext
 
-sc = SparkContext(appName="LineCount")
+sc = SparkContext(appName="WordCount")
 
-lines = sc.textFile("input.txt")
+lines = sc.textFile("/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning/wordCount/Introduction.txt")
 
-line_lengths = lines.map(lambda x: show(x))
+print lines.collect()
 
-# line_lengths.persist()
+result = lines.map(lambda line: len(line.split(" ")))\
+                .reduce(lambda x,y: x+y)
 
-result = line_lengths.reduce(lambda x,y: x+y)
-
-print "Result: ", result
+print "Word Count: ", result
 
 sc.stop()
