@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Mar 01 11:32:01 ICT 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0161-dfd4-cca9-000002365c60 
-on database directory /home/superhorse/ApacheSpark/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@602be6ec 
+Fri Mar 02 09:12:50 ICT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0161-e47b-bc85-000002260b60 
+on database directory /home/superhorse/ApacheSpark/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@22ed8c9d 
 Loaded from file:/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/jars/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_151-8u151-b12-0ubuntu0.16.04.2-b12

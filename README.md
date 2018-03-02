@@ -10,3 +10,5 @@ In the bottom of file, write:
 Then, enter source ~/.bashrc to reset bashrc
 
 All code i make myself are in /home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning
+
+Link install opencv2: https://gist.github.com/arthurbeggs/06df46af94af7f261513934e56103b30
