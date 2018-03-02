@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread("F:\\Python\\Image\\Nene.jpg", 0)
+img = cv2.imread("/home/superhorse/ApacheSpark/spark-2.2.1-bin-hadoop2.7/python/trainning/Image/Nene.jpg", 0)
 
 def cuttingImage(image):
     rows = 0
